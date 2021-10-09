@@ -1,0 +1,9 @@
+server:
+  port: 9006
+security:
+  oauth2:
+    authorization:
+      check-token-access: http://localhost:9005/oauth/check_token
+    resource:
+      jwt:
+        key-uri: http://localhost:9005/oauth/token_key
