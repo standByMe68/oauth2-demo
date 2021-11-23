@@ -58,7 +58,7 @@ public abstract class ResServerConfig extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
         super.configure(resources);
-        if (StringUtils.isEmpty(oAuth2ClientProperties.getClientId())) {
+        if (!StringUtils.isEmpty(oAuth2ClientProperties.getClientId())) {
             resources.resourceId(oAuth2ClientProperties.getClientId());
         }
         if (Objects.nonNull(remoteTokenServices)) {

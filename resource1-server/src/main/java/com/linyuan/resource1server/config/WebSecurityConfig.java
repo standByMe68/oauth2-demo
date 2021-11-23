@@ -18,7 +18,7 @@ public class WebSecurityConfig extends ResServerConfig {
         http
                 .authorizeRequests()
                 .antMatchers("/login").permitAll()
-                .antMatchers("/res","/res2/res")
+                .antMatchers("/res/*","/res2/res")
                 .access("hasRole('USER')");
     }
 

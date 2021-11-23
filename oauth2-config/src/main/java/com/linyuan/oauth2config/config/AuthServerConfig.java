@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.http.HttpMethod;
 import org.springframework.jdbc.datasource.DelegatingDataSource;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -59,7 +60,7 @@ public abstract class AuthServerConfig extends AuthorizationServerConfigurerAdap
     public boolean isSupportRefreshToken;
 
 
-    public AuthServerConfig(int accessTokenValiditySeconds, int refreshTokenValiditySeconds, boolean isReuseRefreshToken, boolean isSupportRefreshToken) {
+    public  AuthServerConfig(int accessTokenValiditySeconds, int refreshTokenValiditySeconds, boolean isReuseRefreshToken, boolean isSupportRefreshToken) {
         this.accessTokenValiditySeconds = accessTokenValiditySeconds;
         this.refreshTokenValiditySeconds = refreshTokenValiditySeconds;
         this.isReuseRefreshToken = isReuseRefreshToken;
@@ -92,10 +93,12 @@ public abstract class AuthServerConfig extends AuthorizationServerConfigurerAdap
         defaultTokenServices.setRefreshTokenValiditySeconds(refreshTokenValiditySeconds);
         //设置增强链
         defaultTokenServices.setTokenEnhancer(tokenEnhancerChain);
+
         //若通过 JDBC 存储令牌
         if (Objects.nonNull(jdbcClientDetailsService)){
             defaultTokenServices.setClientDetailsService(jdbcClientDetailsService);
         }
+
 
         endpoints
                 // 设置当前授权认证管理器，可以自动注入
@@ -104,6 +107,8 @@ public abstract class AuthServerConfig extends AuthorizationServerConfigurerAdap
             .userDetailsService(userDetailsService)
                 // 设置token服务 可以设置token有效配置，刷新配置，增强设置，token的存储设置
             .tokenServices(defaultTokenServices);
+
+
     }
 
 

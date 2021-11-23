@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.provider.ClientDetails;
+import org.springframework.security.oauth2.provider.ClientDetailsService;
+import org.springframework.security.oauth2.provider.ClientRegistrationException;
 import org.springframework.security.oauth2.provider.client.BaseClientDetails;
 import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
 
@@ -48,11 +50,8 @@ public class AuthorizationServerConfig extends AuthServerConfig {
                 .authorizedGrantTypes("authorization_code","password")     // 该client允许的授权类型
                 .accessTokenValiditySeconds(3600)               // Token 的有效期
                 .scopes("read")                    // 允许的授权范围
-                .autoApprove(true);                 //登录后绕过批准询问(/oauth/confirm_access)
-
-
+                .autoApprove(true);           //登录后绕过批准询问(/oauth/confirm_access)
 
 
     }
-
 }
